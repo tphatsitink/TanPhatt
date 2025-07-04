@@ -1,141 +1,227 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AIM PREMIUM - Admin Access</title>
+  <meta charset="UTF-8">
+  <title>❄️ tool cheat vipp</title>
   <style>
+    /* Cài đặt chung */
     * {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', sans-serif;
       box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
     }
 
     body {
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
+      background: url('https://images.unsplash.com/photo-1608889175123-6014a70c0f4b?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+      background-size: cover;
+      overflow-x: hidden;
     }
 
-    .container {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 0 25px rgba(0, 255, 234, 0.3);
-      backdrop-filter: blur(12px);
-      border-radius: 20px;
-      padding: 40px;
-      width: 90%;
-      max-width: 420px;
-      animation: fadeIn 1.2s ease;
-      text-align: center;
-    }
-
-    h2 {
-      margin-bottom: 20px;
-      color: #00ffe1;
-      text-shadow: 0 0 10px #00ffe1;
-    }
-
-    input[type="password"], input[type="text"] {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      outline: none;
-      background: rgba(255,255,255,0.1);
+    /* Hiệu ứng tuyết */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      z-index: 9999;
+      user-select: none;
+      pointer-events: none;
       color: white;
-      font-size: 14px;
-      box-shadow: inset 0 0 5px rgba(0,255,255,0.3);
+      font-size: 1em;
+      animation: fall linear infinite;
     }
 
-    button {
-      width: 100%;
-      padding: 12px;
-      background: #00ffe1;
-      color: #000;
-      border: none;
-      border-radius: 10px;
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Thanh header */
+    header {
+      padding: 15px 20px;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      display: flex;
+      align-items: center;
+    }
+
+    .menu-btn {
+      font-size: 30px;
       cursor: pointer;
-      font-weight: bold;
-      transition: 0.3s;
-      box-shadow: 0 0 15px #00ffe1;
+      margin-right: 20px;
     }
 
-    button:hover {
-      background: #00bfa6;
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      transition: left 0.3s;
+      padding-top: 60px;
+      z-index: 999;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 15px;
+      text-decoration: none;
+      color: white;
+      border-bottom: 1px solid #444;
+      transition: background 0.3s;
+    }
+
+    .sidebar a:hover {
+      background: #555;
+    }
+
+    /* Main content */
+    .main {
+      padding: 20px;
+      margin-top: 20px;
     }
 
     .hidden {
       display: none;
     }
 
-    .footer {
-      margin-top: 10px;
-      font-size: 13px;
-      color: #aaa;
+    /* Panel đẹp kiểu kính */
+    .panel {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 15px;
+      color: white;
+      max-width: 600px;
+      margin: 40px auto;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    h2 {
+      margin-bottom: 20px;
+      font-weight: bold;
+      text-align: center;
     }
 
-    .error {
-      color: #ff7070;
-      margin-bottom: 10px;
-      font-size: 14px;
+    .button {
+      background-color: #00bfff;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      margin: 10px 0;
+      cursor: pointer;
+      border-radius: 8px;
+      font-size: 16px;
+      width: 100%;
+      transition: background 0.3s;
+    }
+
+    .button:hover {
+      background-color: #1e90ff;
+    }
+
+    .admin-input {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+
+    .info-text {
+      font-size: 18px;
+      margin: 15px 0;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
-  <!-- Nhập key admin -->
-  <div class="container" id="keyForm">
-    <h2>🔐 ENTER ADMIN KEY</h2>
-    <div class="error" id="errorText"></div>
-    <input type="password" id="adminKey" placeholder="Nhập key admin...">
-    <button onclick="checkKey()">Tiếp tục</button>
-    <div class="footer">ADMIN SYSTEM • © 2025</div>
+<!-- Hiệu ứng tuyết -->
+<script>
+  function createSnowflake() {
+    const snowflake = document.createElement('div');
+    snowflake.classList.add('snowflake');
+    snowflake.textContent = '❄';
+    snowflake.style.left = Math.random() * window.innerWidth + 'px';
+    snowflake.style.animationDuration = 2 + Math.random() * 3 + 's';
+    snowflake.style.fontSize = (10 + Math.random() * 20) + 'px';
+    document.body.appendChild(snowflake);
+    setTimeout(() => snowflake.remove(), 5000);
+  }
+
+  setInterval(createSnowflake, 150);
+</script>
+
+<header>
+  <span class="menu-btn" onclick="toggleSidebar()">☰</span>
+  <h1>menu premium vip contact</h1>
+</header>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <a href="#" onclick="showTab('download')">📥 Download</a>
+  <a href="#" onclick="showTab('admin')">🔐 Admin Panel</a>
+</div>
+
+<!-- Nội dung chính -->
+<div class="main">
+  <div id="download" class="panel">
+    <h2>📁 Khu vực tải xuống</h2>
+    <button class="button" onclick="copyLink()">AIM NEW - Sao chép link</button>
+    <button class="button" disabled>Sẽ update sau</button>
+    <button class="button" disabled>Sẽ update sau</button>
   </div>
 
-  <!-- Giao diện Admin Panel -->
-  <div class="container hidden" id="adminPanel">
-    <h2>APP: AIM PREMIUM</h2>
-    <div>ID NORMAL: <b>998810234</b></div>
-    <div>SEVER ADDED: <b>VIETNAM, SING, US</b></div>
-    <div>DEVICE: <b>10K+ DEVICE</b></div>
+  <div id="admin" class="panel hidden">
+    <h2>🔐 Admin Panel</h2>
+    <input type="password" class="admin-input" id="adminPassword" placeholder="Nhập mật khẩu">
+    <button class="button" onclick="checkPassword()">Đăng nhập</button>
 
-    <input type="text" placeholder="Enter Server ID..." id="serverID">
-    <button onclick="alert('Server ID submitted!')">Submit</button>
-    <button style="background:#ff0043; margin-top:10px;" onclick="alert('⚠️ SERVER ĐÃ BỊ TẮT!')">Tắt Sever</button>
-    <div class="footer">ADMIN PANEL SYSTEM • © 2025</div>
+    <div id="adminPanelContent" class="hidden">
+      <p class="info-text">📱 50K DEVICE USE HUB</p>
+      <p class="info-text">🖥 SERVER HUB: <strong style="color: lightgreen;">STRONG</strong></p>
+      <button class="button" onclick="shutdownServer()">Tắt Server</button>
+    </div>
   </div>
+</div>
 
-  <script>
-    function checkKey() {
-      const key = document.getElementById("adminKey").value;
-      const errorText = document.getElementById("errorText");
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    sidebar.style.left = sidebar.style.left === "0px" ? "-250px" : "0px";
+  }
 
-      if (key === "103202") {
-        document.getElementById("keyForm").classList.add("hidden");
-        document.getElementById("adminPanel").classList.remove("hidden");
-      } else {
-        errorText.innerText = "❌ Sai mã key admin!";
-      }
+  function showTab(tabId) {
+    document.getElementById("download").classList.add("hidden");
+    document.getElementById("admin").classList.add("hidden");
+    document.getElementById(tabId).classList.remove("hidden");
+    toggleSidebar();
+  }
+
+  function copyLink() {
+    navigator.clipboard.writeText("https://www.mediafire.com/file/p9fsq6plafm4j3u/main.zip/file")
+      .then(() => alert("✅ Đã sao chép liên kết tải xuống!"))
+      .catch(() => alert("❌ Lỗi khi sao chép liên kết."));
+  }
+
+  function checkPassword() {
+    const input = document.getElementById("adminPassword").value;
+    if (input === "000phat@103212") {
+      document.getElementById("adminPassword").classList.add("hidden");
+      event.target.classList.add("hidden");
+      document.getElementById("adminPanelContent").classList.remove("hidden");
+    } else {
+      alert("❌ Mật khẩu sai!");
     }
-  </script>
+  }
+
+  function shutdownServer() {
+    alert("⚠️ Lệnh tắt server đã được gửi ()!");
+  }
+</script>
 
 </body>
 </html>
