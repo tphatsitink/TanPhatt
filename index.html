@@ -1,227 +1,210 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>❄️ tool cheat vipp</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Tiêm file AntiBan + Aimbot tự động"/>
+  <meta name="keywords" content="Inject Tool, AntiBan, Aimbot, Package"/>
+  <meta name="author" content="Bạn"/>
+  <title>Dò Tiêm File - AntiBan + Aimbot</title>
+
+  <!-- FontAwesome CDN for icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+
   <style>
-    /* Cài đặt chung */
-    * {
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
     }
 
-    body {
-      background: url('https://images.unsplash.com/photo-1608889175123-6014a70c0f4b?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
-      background-size: cover;
-      overflow-x: hidden;
+    .container {
+      max-width: 500px;
+      margin: 80px auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 40px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      text-align: center;
     }
 
-    /* Hiệu ứng tuyết */
-    .snowflake {
-      position: fixed;
-      top: -10px;
-      z-index: 9999;
-      user-select: none;
-      pointer-events: none;
-      color: white;
-      font-size: 1em;
-      animation: fall linear infinite;
+    h1 {
+      margin-bottom: 10px;
+      font-size: 26px;
+      color: #00e6e6;
     }
 
-    @keyframes fall {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    p {
+      color: #ddd;
+      font-size: 14px;
     }
 
-    /* Thanh header */
-    header {
-      padding: 15px 20px;
-      background: rgba(0, 0, 0, 0.5);
-      color: white;
-      display: flex;
-      align-items: center;
+    input[type="text"] {
+      width: 85%;
+      padding: 12px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      outline: none;
     }
 
-    .menu-btn {
-      font-size: 30px;
+    input::placeholder {
+      color: #bbb;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      background-color: #00e6e6;
+      color: #000;
+      border: none;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 8px;
       cursor: pointer;
-      margin-right: 20px;
+      transition: background-color 0.3s ease;
     }
 
-    /* Sidebar */
-    .sidebar {
+    button:hover {
+      background-color: #00cccc;
+    }
+
+    .toast {
       position: fixed;
-      top: 0;
-      left: -250px;
-      width: 250px;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      transition: left 0.3s;
-      padding-top: 60px;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #333;
+      color: #fff;
+      padding: 15px 25px;
+      border-radius: 8px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
       z-index: 999;
     }
 
-    .sidebar a {
-      display: block;
-      padding: 15px;
-      text-decoration: none;
-      color: white;
-      border-bottom: 1px solid #444;
-      transition: background 0.3s;
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
     }
 
-    .sidebar a:hover {
-      background: #555;
-    }
-
-    /* Main content */
-    .main {
-      padding: 20px;
+    #package-form {
+      display: none;
       margin-top: 20px;
     }
 
-    .hidden {
-      display: none;
+    .icon-input {
+      position: relative;
+      display: inline-block;
+      width: 85%;
     }
 
-    /* Panel đẹp kiểu kính */
-    .panel {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      padding: 30px;
-      border-radius: 15px;
-      color: white;
-      max-width: 600px;
-      margin: 40px auto;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    .icon-input i {
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      transform: translateY(-50%);
+      color: #bbb;
     }
 
-    h2 {
-      margin-bottom: 20px;
-      font-weight: bold;
-      text-align: center;
+    .icon-input input {
+      padding-left: 35px;
     }
 
-    .button {
-      background-color: #00bfff;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      margin: 10px 0;
-      cursor: pointer;
-      border-radius: 8px;
-      font-size: 16px;
-      width: 100%;
-      transition: background 0.3s;
+    .fade-in {
+      animation: fadeIn 0.5s ease-in-out;
     }
 
-    .button:hover {
-      background-color: #1e90ff;
-    }
-
-    .admin-input {
-      padding: 10px;
-      margin: 10px 0;
-      width: 100%;
-      border-radius: 8px;
-      border: none;
-      font-size: 16px;
-    }
-
-    .info-text {
-      font-size: 18px;
-      margin: 15px 0;
-      text-align: center;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px);}
+      to { opacity: 1; transform: translateY(0);}
     }
   </style>
 </head>
 <body>
+  <main class="container">
+    <h1><i class="fas fa-microchip"></i> Dò Địa Chỉ Tiêm File</h1>
+    <p>Nhập tên máy của bạn để bắt đầu quá trình tiêm file AntiBan + Aimbot:</p>
 
-<!-- Hiệu ứng tuyết -->
-<script>
-  function createSnowflake() {
-    const snowflake = document.createElement('div');
-    snowflake.classList.add('snowflake');
-    snowflake.textContent = '❄';
-    snowflake.style.left = Math.random() * window.innerWidth + 'px';
-    snowflake.style.animationDuration = 2 + Math.random() * 3 + 's';
-    snowflake.style.fontSize = (10 + Math.random() * 20) + 'px';
-    document.body.appendChild(snowflake);
-    setTimeout(() => snowflake.remove(), 5000);
-  }
+    <form id="machine-form">
+      <div class="icon-input">
+        <i class="fas fa-desktop"></i>
+        <input type="text" id="machine-name" placeholder="Tên máy..." required />
+      </div>
+      <br />
+      <button type="submit"><i class="fas fa-search"></i> Dò Ngay</button>
+    </form>
 
-  setInterval(createSnowflake, 150);
-</script>
+    <form id="package-form" class="fade-in">
+      <div class="icon-input">
+        <i class="fas fa-box"></i>
+        <input type="text" id="package-name" placeholder="Nhập package name..." required />
+      </div>
+      <br />
+      <button type="submit"><i class="fas fa-bolt"></i> Tiêm File</button>
+    </form>
+  </main>
 
-<header>
-  <span class="menu-btn" onclick="toggleSidebar()">☰</span>
-  <h1>menu premium vip contact</h1>
-</header>
+  <div id="toast" class="toast"></div>
 
-<!-- Sidebar -->
-<div class="sidebar" id="sidebar">
-  <a href="#" onclick="showTab('download')">📥 Download</a>
-  <a href="#" onclick="showTab('admin')">🔐 Admin Panel</a>
-</div>
+  <script>
+    const machineForm = document.getElementById('machine-form');
+    const packageForm = document.getElementById('package-form');
+    const toast = document.getElementById('toast');
+    const machineInput = document.getElementById('machine-name');
+    const packageInput = document.getElementById('package-name');
 
-<!-- Nội dung chính -->
-<div class="main">
-  <div id="download" class="panel">
-    <h2>📁 Khu vực tải xuống</h2>
-    <button class="button" onclick="copyLink()">AIM NEW - Sao chép link</button>
-    <button class="button" disabled>Sẽ update sau</button>
-    <button class="button" disabled>Sẽ update sau</button>
-  </div>
-
-  <div id="admin" class="panel hidden">
-    <h2>🔐 Admin Panel</h2>
-    <input type="password" class="admin-input" id="adminPassword" placeholder="Nhập mật khẩu">
-    <button class="button" onclick="checkPassword()">Đăng nhập</button>
-
-    <div id="adminPanelContent" class="hidden">
-      <p class="info-text">📱 50K DEVICE USE HUB</p>
-      <p class="info-text">🖥 SERVER HUB: <strong style="color: lightgreen;">STRONG</strong></p>
-      <button class="button" onclick="shutdownServer()">Tắt Server</button>
-    </div>
-  </div>
-</div>
-
-<script>
-  function toggleSidebar() {
-    const sidebar = document.getElementById("sidebar");
-    sidebar.style.left = sidebar.style.left === "0px" ? "-250px" : "0px";
-  }
-
-  function showTab(tabId) {
-    document.getElementById("download").classList.add("hidden");
-    document.getElementById("admin").classList.add("hidden");
-    document.getElementById(tabId).classList.remove("hidden");
-    toggleSidebar();
-  }
-
-  function copyLink() {
-    navigator.clipboard.writeText("https://www.mediafire.com/file/p9fsq6plafm4j3u/main.zip/file")
-      .then(() => alert("✅ Đã sao chép liên kết tải xuống!"))
-      .catch(() => alert("❌ Lỗi khi sao chép liên kết."));
-  }
-
-  function checkPassword() {
-    const input = document.getElementById("adminPassword").value;
-    if (input === "000phat@103212") {
-      document.getElementById("adminPassword").classList.add("hidden");
-      event.target.classList.add("hidden");
-      document.getElementById("adminPanelContent").classList.remove("hidden");
-    } else {
-      alert("❌ Mật khẩu sai!");
+    function showToast(message, duration = 3000) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, duration);
     }
-  }
 
-  function shutdownServer() {
-    alert("⚠️ Lệnh tắt server đã được gửi ()!");
-  }
-</script>
+    machineForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = machineInput.value.trim();
+      if (name === "") {
+        showToast('⚠️ Vui lòng nhập tên máy!');
+        return;
+      }
 
+      showToast('🔍 Đang tìm kiếm địa chỉ tiêm file...', 5000);
+      packageForm.style.display = 'none';
+      packageInput.value = '';
+
+      setTimeout(() => {
+        showToast('✅ Tìm thấy! Nhập package name để tiếp tục.');
+        packageForm.style.display = 'block';
+        packageForm.classList.add('fade-in');
+      }, 5000);
+    });
+
+    packageForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const pkg = packageInput.value.trim();
+      if (pkg === "") {
+        showToast('⚠️ Vui lòng nhập package name!');
+        return;
+      }
+
+      showToast('🚀 Thành công! Bạn có thể sử dụng.');
+      
+      // Reset sau 3 giây
+      setTimeout(() => {
+        machineInput.value = '';
+        packageInput.value = '';
+        packageForm.style.display = 'none';
+      }, 3000);
+    });
+  </script>
 </body>
 </html>
